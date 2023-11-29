@@ -6,6 +6,6 @@
     <title>Next-Logistics</title>
 </head>
 <body>
-    
+    <a href="dtb.php">database</a>
 </body>
 </html>
