@@ -16,7 +16,7 @@ class LogisticDB {
             $this->pdo = new PDO($dsn, $this->username, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            echo "Connected to the database successfully!";
+            echo "<script>console.log('Connected to the database successfully!');</script>";
         } catch (PDOException $e) {
             // Handle database connection errors
             echo "Connection failed: " . $e->getMessage();
@@ -59,7 +59,7 @@ class LogisticDB {
     // Close database connection
     public function closeConnection() {
         $this->pdo = null;
-        echo "<script>console.log(Connection closed.);</script>";
+        echo "<script>console.log('Connection closed.');</script>";
     }
 }
 

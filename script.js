@@ -25,13 +25,13 @@ document.getElementById("projectSearch").addEventListener("input", function () {
 });
 
 // Search options for projectdata-table
-document.getElementById("projectDataSearch").addEventListener("input", function () {
-    searchTable("projectDataData", this.value);
+document.getElementById("projectdataSearch").addEventListener("input", function () {
+    searchTable("projectdataData", this.value);
 });
 
 // Search options for projectusers-table
-document.getElementById("projectUsersSearch").addEventListener("input", function () {
-    searchTable("projectUsersData", this.value);
+document.getElementById("projectusersSearch").addEventListener("input", function () {
+    searchTable("projectusersData", this.value);
 });
 
 // Search options for users-table

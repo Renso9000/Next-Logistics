@@ -1,6 +1,11 @@
 <?php
 require_once 'dtb.php';
 
+//Continue session
+session_start();
+
+$status = $_SESSION['status'];
+
 // Create instance for LogisticDB
 $logisticDB = new LogisticDB();
 
@@ -18,6 +23,8 @@ $users = $logisticDB->getAllUsers();
 
 // Close database connection
 $logisticDB->closeConnection();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -52,8 +59,8 @@ $logisticDB->closeConnection();
     <label for="tableSelector">Select Table: </label>
     <select id="tableSelector" onchange="toggleTable()">
         <option value="project">Project</option>
-        <option value="projectdata">ProjectData</option>
-        <option value="projectusers">ProjectUsers</option>
+        <option value="projectdata">Projectdata</option>
+        <option value="projectusers">Projectusers</option>
         <option value="users">Users</option>
     </select>
 
@@ -85,7 +92,7 @@ $logisticDB->closeConnection();
     <div id="projectdataTable" class="table-container">
         <h2>ProjectData</h2>
         <?php if (!empty($projectsdata)) : ?>
-            <input type="text" class="search-input" id="projectDataSearch" placeholder="Search for projectData...">
+            <input type="text" class="search-input" id="projectdataSearch" placeholder="Search for projectData...">
             <table id="projectdataData" class='tabledata'>
                 <!-- Table header -->
                 <tr>
@@ -109,7 +116,7 @@ $logisticDB->closeConnection();
 
     <div id="projectusersTable" class="table-container">
         <h2>ProjectUsers</h2>
-         <input type="text" class="search-input" id="projectUsersSearch" placeholder="Search for projectusers...">
+         <input type="text" class="search-input" id="projectusersSearch" placeholder="Search for projectusers...">
         <?php if (!empty($projectusers)) : ?>
             <table id="projectusersData" class='tabledata'>
                 <!-- Table header -->
