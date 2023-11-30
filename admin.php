@@ -82,34 +82,23 @@ $logisticDB->closeConnection();
         <?php endif; ?>
     </div>
 
-    <div id="projectDataTable" class="table-container">
+    <div id="projectdataTable" class="table-container">
         <h2>ProjectData</h2>
         <?php if (!empty($projectsdata)) : ?>
             <input type="text" class="search-input" id="projectDataSearch" placeholder="Search for projectData...">
-            <table id="projectDataData" class='tabledata'>
+            <table id="projectdataData" class='tabledata'>
                 <!-- Table header -->
                 <tr>
                     <?php foreach ($projectsdata[0] as $key => $value) : ?>
                         <th><?php echo $key; ?></th>
                     <?php endforeach; ?>
                 </tr>
-                <!-- Table rows -->
-                <?php foreach ($projectsdata as $projectdata) : ?>
+               <!-- Table rows -->
+               <?php foreach ($projectsdata as $projectdata) : ?>
                     <tr>
-                        <td>
-                            <?php echo $value; ?>
-                            <form method="post" action="update_data.php">
-                                <input type="hidden" name="projectData_id" value="<?php echo $projectdata['ProjectDataID']; ?>">
-                                <input type="text" name="updated_data" placeholder="Enter updated data">
-                                <button type="submit">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="post" action="deactivate_data.php">
-                                <input type="hidden" name="projectData_id" value="<?php echo $projectdata['ProjectDataID']; ?>">
-                                <button type="submit">Deactivate</button>
-                            </form>
-                        </td>
+                        <?php foreach ($projectdata as $value) : ?>
+                            <td><?php echo $value; ?></td>
+                        <?php endforeach; ?>
                     </tr>
                 <?php endforeach; ?>
             </table>
@@ -118,11 +107,11 @@ $logisticDB->closeConnection();
         <?php endif; ?>
     </div>
 
-    <div id="projectUsersTable" class="table-container">
+    <div id="projectusersTable" class="table-container">
         <h2>ProjectUsers</h2>
          <input type="text" class="search-input" id="projectUsersSearch" placeholder="Search for projectusers...">
         <?php if (!empty($projectusers)) : ?>
-            <table id="projectUsersData" class='tabledata'>
+            <table id="projectusersData" class='tabledata'>
                 <!-- Table header -->
                 <tr>
                     <?php foreach ($projectusers[0] as $key => $value) : ?>
