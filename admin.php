@@ -6,6 +6,15 @@ session_start();
 
 $status = $_SESSION['status'];
 
+$admin = null;
+
+if ($status == 'admin') {
+    $admin = $status;
+} else {
+    echo '<h2>Je moet een admin zijn om deze pagina te kunnen bekijken.</h2>';
+}
+
+
 // Create instance for LogisticDB
 $logisticDB = new LogisticDB();
 
@@ -24,6 +33,11 @@ $users = $logisticDB->getAllUsers();
 // Close database connection
 $logisticDB->closeConnection();
 
+if(isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+}
 
 ?>
 
@@ -55,7 +69,8 @@ $logisticDB->closeConnection();
     </style>
 </head>
 <body>
-
+    
+<?php if ($admin) : ?>
     <label for="tableSelector">Select Table: </label>
     <select id="tableSelector" onchange="toggleTable()">
         <option value="project">Project</option>
@@ -163,6 +178,16 @@ $logisticDB->closeConnection();
             <p>No users found.</p>
         <?php endif; ?>
     </div>
+<?php else : ?>
+
+    <h4>Ik meen het</h4>
+
+<?php endif; ?>
+
+    <br/>
+    <form action="#" method="post">
+        <input type="submit" name="logout" value="Uitloggen" >
+    </form>
 
     <script src="script.js"></script>
     <script>

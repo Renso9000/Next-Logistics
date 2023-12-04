@@ -2,8 +2,8 @@
 require_once 'dtb.php';
 
 //Remove previous session
-session_unset();
-session_destroy();
+// session_unset();
+// session_destroy();
 
 //Start new session
 session_start();
@@ -27,24 +27,25 @@ session_start();
 </head>
 <body>
     <form action="#" method="post">
+        <h2>Kies hier je status</h2>
         <div class="statusOptions">
-            <input type='range' name='status' id="user" value='Gebruiker' />
-            <label for="user">User</label>
-            <input type='range' name='status' id="admin" value='Admin' />
-            <label for="admin">admin</label>
-        </div>
+            <input type='radio' name='status' id="user" value='user' required/>
+            <label for="user">Gebruiker</label><br/>
+            <input type='radio' name='status' id="admin" value='admin' required/>
+            <label for="admin">Admin</label>
+        </div><br/>
         <input type="submit" name="submit" value="Inloggen">
     </form>
-    <a href="admin.php">Admin</a>
 </body>
 </html>
 
 <?php 
 
-if(isset($_POST['status'])){
+if(isset($_POST['submit'])){
     $status = $_POST['status'];
+    $_SESSION['status'] = $status;
+    // var_dump($_SESSION['status']);
+    header('Location: admin.php');
 }
-
-$_SESSION['status'] = $status;
 
 ?>
