@@ -21,7 +21,8 @@ class hoursregistration {
                 Project.MaxHours AS ProjectMaxHours,
                 Users.Name AS UserName,
                 Projectdata.EntryDT AS EntryDateTime,
-                Projectdata.WorkDT AS WorkDateTime
+                Projectdata.WorkDT AS WorkDateTime,
+                Projectdata.Description AS Description
             FROM
                 Projectdata
             JOIN
@@ -32,7 +33,7 @@ class hoursregistration {
                 Project.Active = true
                 AND Users.Active = true
             ORDER BY
-                Projectdata.EntryDT DESC
+                Project.Code DESC
         ";
 
         // Voorbereiden en uitvoeren van de query

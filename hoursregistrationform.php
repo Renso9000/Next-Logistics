@@ -25,6 +25,7 @@ include 'hoursregistration.php';
 </head>
 <body>
 <h2>Urenregistratie Overzicht</h2>
+<a href='addhoursform.php'><button>Uren toevoegen</button></a>
 
 <?php
 // Inclusief het PHP-bestand met de logica
@@ -42,12 +43,13 @@ $hoursregistration = $hoursregistration->getAllhoursregistration();
     <tr>
         <th>Project Code</th>
         <th>Project Title</th>
-        <th>Entry Date Time</th>
-        <th>Work Date Time</th>
-        <th>User Name</th>
         <th>Project Start Date Time</th>
         <th>Project End Date Time</th>
         <th>Project Max Hours</th>
+        <th>User Name</th>
+        <th>Entry Date Time</th>
+        <th>Work Date Time</th>
+        <th>Description</th>
     </tr>
     </thead>
     <tbody>
@@ -55,12 +57,13 @@ $hoursregistration = $hoursregistration->getAllhoursregistration();
         <tr>
             <td><?php echo $registratie['ProjectCode']; ?></td>
             <td><?php echo $registratie['ProjectTitle']; ?></td>
-            <td><?php echo $registratie['EntryDateTime']; ?></td>
-            <td><?php echo $registratie['WorkDateTime']; ?></td>
-            <td><?php echo $registratie['UserName']; ?></td>
             <td><?php echo $registratie['ProjectStartDateTime']; ?></td>
             <td><?php echo $registratie['ProjectEndDateTime']; ?></td>
             <td><?php echo $registratie['ProjectMaxHours']; ?></td>
+            <td><?php echo $registratie['UserName']; ?></td>
+            <td><?php echo $registratie['EntryDateTime']; ?></td>
+            <td><?php echo $registratie['WorkDateTime']; ?></td>
+            <td><?php echo $registratie['Description']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
