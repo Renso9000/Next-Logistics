@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 dec 2023 om 10:14
+-- Gegenereerd op: 06 dec 2023 om 13:33
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -33,8 +33,8 @@ CREATE TABLE `project` (
   `Code` int(11) NOT NULL,
   `Actual` tinyint(1) NOT NULL,
   `Title` varchar(255) NOT NULL,
-  `StartDT` date NOT NULL,
-  `EndDT` date NOT NULL,
+  `StartDT` datetime NOT NULL,
+  `EndDT` datetime NOT NULL,
   `MaxHours` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43,10 +43,10 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`ID`, `Active`, `Code`, `Actual`, `Title`, `StartDT`, `EndDT`, `MaxHours`) VALUES
-(1, 1, 9909, 1, 'SensorData', '2023-12-06', '2023-12-06', '00:00:50'),
-(2, 1, 4564, 1, 'DataCake', '2023-12-06', '2023-12-06', '00:00:50'),
-(3, 1, 3456, 1, 'GroeneDaken', '2023-12-06', '2023-12-06', '00:00:50'),
-(4, 1, 1321, 1, 'Sopranos', '2023-12-06', '2023-12-06', '00:00:50');
+(1, 1, 9909, 1, 'SensorData', '2023-12-06 00:00:00', '2023-12-06 00:00:00', '00:00:50'),
+(2, 1, 4564, 1, 'DataCake', '2023-12-06 00:00:00', '2023-12-06 00:00:00', '00:00:50'),
+(3, 1, 3456, 1, 'GroeneDaken', '2023-12-06 00:00:00', '2023-12-06 00:00:00', '00:00:50'),
+(4, 1, 1321, 1, 'Sopranos', '2023-12-06 00:00:00', '2023-12-06 00:00:00', '00:00:50');
 
 -- --------------------------------------------------------
 
@@ -58,8 +58,8 @@ CREATE TABLE `projectdata` (
   `ID` int(11) NOT NULL,
   `ProjectID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
-  `EntryDT` time NOT NULL,
-  `WorkDT` time NOT NULL,
+  `EntryDT` datetime NOT NULL,
+  `WorkDT` datetime NOT NULL,
   `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,23 +68,50 @@ CREATE TABLE `projectdata` (
 --
 
 INSERT INTO `projectdata` (`ID`, `ProjectID`, `UserID`, `EntryDT`, `WorkDT`, `Description`) VALUES
-(1, 1, 1, '00:00:00', '00:00:00', 'Data for sensors'),
-(2, 2, 2, '00:00:00', '00:00:00', 'Bunch of data stuff'),
-(3, 3, 1, '00:00:00', '00:00:00', 'Website met sensoren die het weer meten'),
-(4, 4, 2, '00:00:00', '00:00:00', 'Pizza Website'),
-(5, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(6, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(7, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(8, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(9, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(10, 1, 1, '00:00:00', '00:00:00', 'Werkzaamheden voltooid.'),
-(11, 2, 1, '00:00:00', '00:00:00', 'help met form'),
-(12, 2, 1, '00:00:00', '00:00:00', 'help met form'),
-(13, 2, 1, '00:00:00', '00:00:00', 'help met form'),
-(14, 4, 1, '00:00:00', '00:00:00', 'form werkt nog niet'),
-(15, 4, 1, '00:00:00', '00:00:00', 'form werkt voor de helft'),
-(16, 4, 2, '00:00:00', '00:00:00', 'form werkt voor de helft'),
-(17, 4, 1, '00:00:00', '00:00:00', 'form werkt voor de helft');
+(1, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Data for sensors'),
+(2, 2, 2, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Bunch of data stuff'),
+(3, 3, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Website met sensoren die het weer meten'),
+(4, 4, 2, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Pizza Website'),
+(5, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(6, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(7, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(8, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(9, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(10, 1, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'Werkzaamheden voltooid.'),
+(11, 2, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'help met form'),
+(12, 2, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'help met form'),
+(13, 2, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'help met form'),
+(14, 4, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'form werkt nog niet'),
+(15, 4, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'form werkt voor de helft'),
+(16, 4, 2, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'form werkt voor de helft'),
+(17, 4, 1, '2023-12-06 00:00:00', '2023-12-06 00:00:00', 'form werkt voor de helft'),
+(18, 2, 1, '2023-12-06 11:26:24', '2023-12-06 00:00:00', 'Gewerkt aan werkzaamheden'),
+(19, 2, 1, '2023-12-06 11:27:19', '2023-12-06 00:00:00', 'Gewerkt aan werkzaamheden'),
+(20, 4, 1, '2023-12-06 11:28:40', '2023-12-06 00:00:00', 'werkzaamheden'),
+(21, 4, 1, '2023-12-06 11:29:04', '2023-12-06 00:00:00', 'werkzaamheden'),
+(22, 4, 1, '2023-12-06 11:38:55', '2023-12-06 00:00:00', 'werkzaamheden'),
+(23, 2, 1, '2023-12-06 11:39:03', '2023-12-06 00:00:00', 'Gewerkt aan werkzaamheden'),
+(24, 4, 1, '2023-12-06 11:40:00', '2023-12-06 00:00:00', 'werkt ?'),
+(25, 4, 1, '2023-12-06 11:45:23', '2023-12-06 00:00:00', 'werkt ?'),
+(26, 1, 1, '2023-12-06 11:45:59', '2023-12-06 00:00:00', 'werkt'),
+(27, 1, 1, '2023-12-06 11:46:41', '2023-12-06 11:46:41', 'werkt'),
+(28, 1, 2, '2023-12-06 11:47:50', '2023-12-06 11:47:50', 'werkt'),
+(29, 1, 2, '2023-12-06 11:45:00', '2023-12-06 17:45:00', 'werkt'),
+(30, 2, 2, '2023-12-06 10:54:00', '2023-12-06 17:54:00', 'werkt'),
+(31, 2, 2, '2023-12-06 10:54:00', '2023-12-06 17:54:00', 'werkt'),
+(32, 4, 2, '2023-12-06 08:21:00', '2023-12-06 17:21:00', 'werkt'),
+(33, 4, 2, '2023-12-06 09:26:00', '2023-12-06 16:26:00', 'werk'),
+(34, 1, 2, '2023-12-06 08:27:00', '2023-12-06 16:27:00', 'werkt'),
+(35, 1, 2, '2023-12-06 08:27:00', '2023-12-06 16:27:00', 'werkt'),
+(36, 4, 2, '2023-12-06 10:47:00', '2023-12-06 20:47:00', 'werkt'),
+(37, 4, 2, '2023-12-06 10:47:00', '2023-12-06 20:47:00', 'werkt'),
+(38, 4, 2, '2023-12-06 10:47:00', '2023-12-06 20:47:00', 'werkt'),
+(39, 4, 2, '2023-12-06 11:49:00', '2023-12-06 17:49:00', 'werkt'),
+(40, 2, 2, '2023-12-06 10:10:00', '2023-12-06 18:10:00', 'werkt'),
+(41, 2, 2, '2023-12-06 10:10:00', '2023-12-06 18:10:00', 'werkt'),
+(42, 2, 2, '2023-12-06 10:10:00', '2023-12-06 18:10:00', 'werkt'),
+(43, 1, 2, '2023-12-06 10:14:00', '2023-12-06 17:14:00', 'werkt'),
+(44, 2, 2, '2023-12-06 10:15:00', '2023-12-06 17:15:00', 'werkt');
 
 -- --------------------------------------------------------
 
@@ -175,7 +202,7 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT voor een tabel `projectdata`
 --
 ALTER TABLE `projectdata`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT voor een tabel `projectusers`
