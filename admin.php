@@ -1,6 +1,20 @@
 <?php
 require_once 'dtb.php';
 
+//Continue session
+session_start();
+
+$status = $_SESSION['status'];
+
+$admin = null;
+
+if ($status == 'admin') {
+    $admin = $status;
+} else {
+    echo '<h2>Je moet een admin zijn om deze pagina te kunnen bekijken.</h2>';
+}
+
+
 // Create instance for LogisticDB
 $logisticDB = new LogisticDB();
 
@@ -18,6 +32,13 @@ $users = $logisticDB->getAllUsers();
 
 // Close database connection
 $logisticDB->closeConnection();
+
+if(isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +70,12 @@ $logisticDB->closeConnection();
 </head>
 <body>
 
+<?php if ($admin) : ?>
     <label for="tableSelector">Select Table: </label>
     <select id="tableSelector" onchange="toggleTable()">
         <option value="project">Project</option>
-        <option value="projectdata">ProjectData</option>
-        <option value="projectusers">ProjectUsers</option>
+        <option value="projectdata">Projectdata</option>
+        <option value="projectusers">Projectusers</option>
         <option value="users">Users</option>
     </select>
 
@@ -82,11 +104,11 @@ $logisticDB->closeConnection();
         <?php endif; ?>
     </div>
 
-    <div id="projectDataTable" class="table-container">
+    <div id="projectdataTable" class="table-container">
         <h2>ProjectData</h2>
         <?php if (!empty($projectsdata)) : ?>
-            <input type="text" class="search-input" id="projectDataSearch" placeholder="Search for projectData...">
-            <table id="projectDataData" class='tabledata'>
+            <input type="text" class="search-input" id="projectdataSearch" placeholder="Search for projectData...">
+            <table id="projectdataData" class='tabledata'>
                 <!-- Table header -->
                 <tr>
                     <?php foreach ($projectsdata[0] as $key => $value) : ?>
@@ -96,20 +118,9 @@ $logisticDB->closeConnection();
                 <!-- Table rows -->
                 <?php foreach ($projectsdata as $projectdata) : ?>
                     <tr>
-                        <td>
-                            <?php echo $value; ?>
-                            <form method="post" action="update_data.php">
-                                <input type="hidden" name="projectData_id" value="<?php echo $projectdata['ProjectDataID']; ?>">
-                                <input type="text" name="updated_data" placeholder="Enter updated data">
-                                <button type="submit">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="post" action="deactivate_data.php">
-                                <input type="hidden" name="projectData_id" value="<?php echo $projectdata['ProjectDataID']; ?>">
-                                <button type="submit">Deactivate</button>
-                            </form>
-                        </td>
+                        <?php foreach ($projectdata as $value) : ?>
+                            <td><?php echo $value; ?></td>
+                        <?php endforeach; ?>
                     </tr>
                 <?php endforeach; ?>
             </table>
@@ -118,11 +129,11 @@ $logisticDB->closeConnection();
         <?php endif; ?>
     </div>
 
-    <div id="projectUsersTable" class="table-container">
+    <div id="projectusersTable" class="table-container">
         <h2>ProjectUsers</h2>
-         <input type="text" class="search-input" id="projectUsersSearch" placeholder="Search for projectusers...">
+        <input type="text" class="search-input" id="projectusersSearch" placeholder="Search for projectusers...">
         <?php if (!empty($projectusers)) : ?>
-            <table id="projectUsersData" class='tabledata'>
+            <table id="projectusersData" class='tabledata'>
                 <!-- Table header -->
                 <tr>
                     <?php foreach ($projectusers[0] as $key => $value) : ?>
@@ -167,13 +178,23 @@ $logisticDB->closeConnection();
             <p>No users found.</p>
         <?php endif; ?>
     </div>
+<?php else : ?>
 
-    <script src="script.js"></script>
-    <script>
-        // Set the default selected table and display it
-        document.getElementById("tableSelector").value = "project";
-        toggleTable();
-    </script>
+    <h4>Ik meen het</h4>
+
+<?php endif; ?>
+
+<br/>
+<form action="#" method="post">
+    <input type="submit" name="logout" value="Uitloggen" >
+</form>
+
+<script src="script.js"></script>
+<script>
+    // Set the default selected table and display it
+    document.getElementById("tableSelector").value = "project";
+    toggleTable();
+</script>
 
 </body>
 </html>

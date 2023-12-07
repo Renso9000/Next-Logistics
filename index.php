@@ -1,11 +1,59 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next-Logistics</title>
-</head>
-<body>
-    <a href="dtb.php">admin</a>
-</body>
-</html>
+<?php
+require_once 'dtb.php';
+
+//Remove previous session
+// session_unset();
+// session_destroy();
+
+//Start new session
+session_start();
+
+// // Create instance for LogisticDB
+// $logisticDB = new LogisticDB();
+
+// // Fetch users-table
+// $users = $logisticDB->getAllUsers();
+
+// // Close database connection
+// $logisticDB->closeConnection();
+?>
+
+    <!DOCTYPE html>
+    <html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Next-Logistics</title>
+    </head>
+    <body>
+    <form action="#" method="post">
+        <h2>Kies hier je status</h2>
+        <div class="statusOptions">
+            <input type='radio' name='status' id="user" value='gebruiker' required/>
+            <label for="user">Gebruiker</label><br/>
+            <input type='radio' name='status' id="admin" value='admin' required/>
+            <label for="admin">Admin</label>
+        </div><br/>
+        <input type="submit" name="submit" value="Inloggen">
+    </form>
+    </body>
+    </html>
+
+<?php
+
+if(isset($_POST['submit'])){
+    $status = $_POST['status'];
+    $_SESSION['user_role'] = $status;
+
+    if ($status === 'admin') {
+        header('Location: admin.php');
+    } elseif ($status === 'gebruiker') {
+        header('Location: hoursregistrationform.php');
+    } else {
+        // Onbekende gebruikersrol, voeg hier een foutafhandeling toe indien nodig
+        echo "Onbekende gebruikersrol";
+    }
+    exit(); // Zorg ervoor dat het script hier stopt om ongewenste verdere uitvoering te voorkomen
+}
+
+?>
