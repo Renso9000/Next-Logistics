@@ -1,13 +1,13 @@
 <?php
-require_once 'dtb.php';
+//require_once 'dtb.php';
 // Start new session
-session_start();
+/*session_start();
 
 // Stel de gebruikersrol in vanuit de externe authenticatie
 // Dit zou ergens eerder in je script moeten worden ingesteld
 $loggedInUserRole = 'user'; // Vervang dit door de daadwerkelijke gebruikersrol
 
-$_SESSION['user_role'] = $loggedInUserRole;
+$_SESSION['user_role'] = $loggedInUserRole;*/
 
 class AddHours
 {

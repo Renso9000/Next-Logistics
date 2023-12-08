@@ -8,14 +8,14 @@ $hoursregistration = new hoursregistration();
 $registrations = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedProjectCode = isset($_POST['selectedProjectCode']) ? $_POST['selectedProjectCode'] : null;
-    echo "Selected Project Code: " . $selectedProjectCode;
+    //echo "Selected Project Code: " . $selectedProjectCode;
 
     // Roep de getAllhoursregistration-methode aan
     $registrations = $hoursregistration->getAllhoursregistration($selectedProjectCode);
 
     // Voeg deze regels toe om de resultaten te controleren
-    echo "Resultaat van getAllhoursregistration: ";
-    var_dump($registrations);
+    //echo "Resultaat van getAllhoursregistration: ";
+    //var_dump($registrations);
 }
 
 // Maak een instantie van LogisticDB

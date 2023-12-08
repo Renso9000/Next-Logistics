@@ -1,11 +1,11 @@
 <?php
 include 'addhours.php';
-
 include 'hoursregistration.php';
 
 // Maak een instantie van AddHours
 $addHours = new AddHours();
-//$hoursregistration = new hoursregistration();
+$hoursregistration = new hoursregistration();
+$logisticDB = new LogisticDB();
 
 // Als het formulier is ingediend
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
@@ -21,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     echo '<p>Uren zijn succesvol toegevoegd!</p>';
 }
+// Fetch projects for the dropdown
+$projects = $logisticDB->getAllProjects();
+
 
 ?>
 <!DOCTYPE html>
@@ -34,14 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <h2>Uren Invoeren</h2>
 <form method="post" action="">
     <label for="projectCode">Project:</label>
-    <!--<select name="projectCode" required>
+    <select name="projectCode" required>
         <?php
-/*        $projects = $hoursregistration->getAllProjects();
         foreach ($projects as $project) {
             echo '<option value="' . $project['Code'] . '">' . $project['Title'] . '</option>';
         }
-        */?>
-    </select><br>-->
+        ?>
+    </select><br>
 
 
     <label for="date">Datum:</label>
