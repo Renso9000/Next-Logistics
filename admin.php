@@ -46,7 +46,7 @@ if(isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soccer Data</title>
+    <title>Next-Logistics</title>
     <style>
         table {
             display: none;
@@ -89,6 +89,7 @@ if(isset($_POST['logout'])) {
                     <?php foreach ($projects[0] as $key => $value) : ?>
                         <th><?php echo $key; ?></th>
                     <?php endforeach; ?>
+                    <th>Verwijderen</th>
                 </tr>
                 <!-- Table rows -->
                 <?php foreach ($projects as $project) : ?>
@@ -96,6 +97,17 @@ if(isset($_POST['logout'])) {
                         <?php foreach ($project as $value) : ?>
                             <td><?php echo $value; ?></td>
                         <?php endforeach; ?>
+                        <td>
+                            <form method="post">
+                                <input type="submit" name="deactivate" value="Bevestigen"/>
+                            </form>
+                            <?php 
+                                if(isset($_POST['deactivate'])){
+                                    $projectId = $project['ID'];
+                                    $logisticDB->updateProjectStatus($projectId);
+                                }
+                            ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
@@ -186,7 +198,7 @@ if(isset($_POST['logout'])) {
 
     <br/>
     <form action="#" method="post">
-        <input type="submit" name="logout" value="Uitloggen" >
+        <input type="submit" name="logout" value="Uitloggen" />
     </form>
 
     <script src="script.js"></script>

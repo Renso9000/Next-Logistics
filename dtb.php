@@ -16,16 +16,10 @@ class LogisticDB {
             $this->pdo = new PDO($dsn, $this->username, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            echo "<script>console.log('Connected to the database successfully!');</script>";
         } catch (PDOException $e) {
             // Handle database connection errors
             echo "Connection failed: " . $e->getMessage();
         }
-    }
-
-    // Method to prepare statement
-    public function prepare($query) {
-        return $this->pdo->prepare($query);
     }
 
     // Method to fetch project-table
@@ -56,10 +50,29 @@ class LogisticDB {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Method to deativate data in the database
+    public function updateProjectStatus($projectId) {
+        try {
+            $tableName = 'project';
+            $sql = "UPDATE $tableName SET Active = 0 WHERE ID = :projectId AND Active = 1";
+
+            // Use prepared statement to prevent SQL injection
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':projectId', $projectId, PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->closeCursor();
+
+            return true; 
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     // Close database connection
     public function closeConnection() {
-        $this->pdo = null;
-        echo "<script>console.log('Connection closed.');</script>";
+        if ($this->pdo !== null) {
+            $this->pdo = null;
+        }
     }
 }
 
